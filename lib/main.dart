@@ -20,11 +20,11 @@ class Home extends StatelessWidget {
     return Container(
       color: Colors.green[50],
       padding: const EdgeInsets.all(50),
-      margin: const EdgeInsets.fromLTRB(40, 100, 100, 100),
+      margin: const EdgeInsets.fromLTRB(40, 100, 40, 100),
       child: const Text(
         "Haylo Whassup",
         style: TextStyle(
-          fontSize: 80,
+          fontSize: 25,
           letterSpacing: 5,
           decoration: TextDecoration.overline,
           fontStyle: FontStyle.italic,
