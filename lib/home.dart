@@ -23,14 +23,14 @@ class Home extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-                color: Color.fromARGB(255, 156, 226, 27),
+                color: Color.fromARGB(255, 109, 156, 237),
                 padding: const EdgeInsets.all(40),
                 child: const Text(
-                  "My goal of drinking water daily is : 3L",
+                  "My goal of drinking water daily is : 3L,Then I have to drink if my bottle is",
                   textAlign: TextAlign.center,
                 )),
             Container(
-              color: Color.fromARGB(255, 220, 151, 40),
+              color: Colors.blue[200],
               padding: const EdgeInsets.all(40),
               child: const Goals(),
             )

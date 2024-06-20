@@ -5,22 +5,73 @@ class Goals extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
         Row(
           children: [
-            Text('1 litre :'),
-            Text('Daily 3 Bottles'),
-            SizedBox(width: 100)
+            const Text('1 litre :'),
+            const Text('Daily 3 Bottles'),
+            Image.asset(
+              'assets/img/bottle.jpg',
+              width: 25,
+              color: Colors.blue[200],
+              colorBlendMode: BlendMode.multiply,
+            ),
+            Image.asset(
+              'assets/img/bottle.jpg',
+              width: 25,
+              color: Colors.blue[200],
+              colorBlendMode: BlendMode.multiply,
+            ),
+            Image.asset(
+              'assets/img/bottle.jpg',
+              width: 25,
+              color: Colors.blue[200],
+              colorBlendMode: BlendMode.multiply,
+            ),
+            const SizedBox(width: 50),
           ],
         ),
         Row(
           children: [
-            Text('500 ml :'),
-            Text('Daily 6 Bottles'),
-            SizedBox(
-              width: 50,
-            )
+            const Text('500 ml :'),
+            const Text('Daily 6 Bottles'),
+            Image.asset(
+              'assets/img/bottle.jpg',
+              width: 25,
+              color: Colors.blue[200],
+              colorBlendMode: BlendMode.multiply,
+            ),
+            Image.asset(
+              'assets/img/bottle.jpg',
+              width: 25,
+              color: Colors.blue[200],
+              colorBlendMode: BlendMode.multiply,
+            ),
+            Image.asset(
+              'assets/img/bottle.jpg',
+              width: 25,
+              color: Colors.blue[200],
+              colorBlendMode: BlendMode.multiply,
+            ),
+            Image.asset(
+              'assets/img/bottle.jpg',
+              width: 25,
+              color: Colors.blue[200],
+              colorBlendMode: BlendMode.multiply,
+            ),
+            Image.asset(
+              'assets/img/bottle.jpg',
+              width: 25,
+              color: Colors.blue[200],
+              colorBlendMode: BlendMode.multiply,
+            ),
+            Image.asset(
+              'assets/img/bottle.jpg',
+              width: 25,
+              color: Colors.blue[200],
+              colorBlendMode: BlendMode.multiply,
+            ),
           ],
         )
       ],
