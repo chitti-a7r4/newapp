@@ -1,35 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:newapp/home.dart';
 
 void main() {
-  runApp(MaterialApp(
-      home: Scaffold(
-    appBar: AppBar(
-      title: const Text("My water count"),
-      backgroundColor: Colors.blue[300],
-      centerTitle: true,
-    ),
-    body: const Home(),
-  )));
+  runApp(const MaterialApp(
+    home: Home(),
+  ));
 }
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class Sandbox extends StatelessWidget {
+  const Sandbox({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.green[50],
-      padding: const EdgeInsets.all(50),
-      margin: const EdgeInsets.fromLTRB(40, 100, 40, 100),
-      child: const Text(
-        "Haylo Whassup",
-        style: TextStyle(
-          fontSize: 25,
-          letterSpacing: 5,
-          decoration: TextDecoration.overline,
-          fontStyle: FontStyle.italic,
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text("My App"),
+          backgroundColor: Colors.green[300],
         ),
-      ),
-    );
+        body: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                color: Colors.amber[400],
+                height: 100,
+                child: const Text("Hi Hello"),
+              ),
+              Container(
+                color: const Color.fromARGB(255, 54, 230, 233),
+                height: 200,
+                child: const Text("Hi Hello"),
+              ),
+              Container(
+                color: const Color.fromARGB(255, 42, 208, 125),
+                height: 300,
+                child: const Text("Hi Hello"),
+              )
+            ]));
   }
 }
