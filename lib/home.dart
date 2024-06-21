@@ -15,7 +15,7 @@ class Home extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 58, 176, 240),
+        backgroundColor: Colors.blue[600],
         centerTitle: true,
       ),
       body: Column(
@@ -23,17 +23,23 @@ class Home extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-                color: Color.fromARGB(255, 109, 156, 237),
-                padding: const EdgeInsets.all(40),
+                color: Colors.blue[300],
+                padding: const EdgeInsets.all(25),
                 child: const Text(
-                  "My goal of drinking water daily is : 3L,Then I have to drink if my bottle is",
+                  "How much water have You drank today?",
                   textAlign: TextAlign.center,
                 )),
             Container(
               color: Colors.blue[200],
-              padding: const EdgeInsets.all(40),
+              padding: const EdgeInsets.fromLTRB(15, 20, 10, 20),
               child: const Goals(),
-            )
+            ),
+            Expanded(
+              child: Image.asset(
+                'assets/img/water_bg.jpg',
+                fit: BoxFit.fitWidth,
+              ),
+            ),
           ]),
     );
   }
