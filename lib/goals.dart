@@ -1,51 +1,70 @@
-// goals.dart
 import 'package:flutter/material.dart';
+import 'preferences_service.dart';
 
 class Goals extends StatefulWidget {
-  final Function(double) onUpdate; // Callback to notify parent of changes
+  const Goals({super.key, required this.onUpdate});
 
-  const Goals({Key? key, required this.onUpdate}) : super(key: key);
+  final Function onUpdate;
 
   @override
   State<Goals> createState() => _GoalsState();
 }
 
 class _GoalsState extends State<Goals> {
-  int glass = 0;
-  int sip = 0;
+  int glassCount = 0;
+  int sipCount = 0;
+  final PreferencesService _prefsService = PreferencesService();
 
-  void increaseGlass() {
-    setState(() {
-      glass = glass < 10 ? glass + 1 : 10;
-      widget.onUpdate(getTotalWaterIntake());
-    });
+  @override
+  void initState() {
+    super.initState();
+    _loadData();
   }
 
-  void increaseSip() {
+  Future<void> _loadData() async {
+    final glass = await _prefsService.getGlassCount();
+    final sip = await _prefsService.getSipCount();
     setState(() {
-      sip = sip < 20 ? sip + 1 : 20;
-      widget.onUpdate(getTotalWaterIntake());
+      glassCount = glass ?? 0;
+      sipCount = sip ?? 0;
     });
+    widget.onUpdate(_getTotalWaterIntake());
   }
 
-  void decreaseGlass() {
+  void _increaseGlass() {
     setState(() {
-      glass = glass > 0 ? glass - 1 : 0;
-      widget.onUpdate(getTotalWaterIntake());
+      glassCount = glassCount < 10 ? glassCount + 1 : 10;
     });
+    _prefsService.saveGlassCount(glassCount);
+    widget.onUpdate(_getTotalWaterIntake());
   }
 
-  void decreaseSip() {
+  void _increaseSip() {
     setState(() {
-      sip = sip > 0 ? sip - 1 : 0;
-      widget.onUpdate(getTotalWaterIntake());
+      sipCount = sipCount < 20 ? sipCount + 1 : 20;
     });
+    _prefsService.saveSipCount(sipCount);
+    widget.onUpdate(_getTotalWaterIntake());
   }
 
-  double getTotalWaterIntake() {
-    double glassIntake = glass * 0.5; // each glass is 0.5 liters
-    double sipIntake = sip * 0.25; // each sip is 0.25 liters
-    return glassIntake + sipIntake;
+  void _decreaseGlass() {
+    setState(() {
+      glassCount = glassCount > 0 ? glassCount - 1 : 0;
+    });
+    _prefsService.saveGlassCount(glassCount);
+    widget.onUpdate(_getTotalWaterIntake());
+  }
+
+  void _decreaseSip() {
+    setState(() {
+      sipCount = sipCount > 0 ? sipCount - 1 : 0;
+    });
+    _prefsService.saveSipCount(sipCount);
+    widget.onUpdate(_getTotalWaterIntake());
+  }
+
+  double _getTotalWaterIntake() {
+    return glassCount * 0.5 + sipCount * 0.25;
   }
 
   @override
@@ -54,8 +73,8 @@ class _GoalsState extends State<Goals> {
       children: [
         Row(
           children: [
-            const Text('A glass full of water (500ml) :'),
-            Text('$glass'),
+            const Text('A glass of water (500ml):'),
+            Text('$glassCount'),
             Image.asset(
               'assets/img/glass.png',
               width: 35,
@@ -64,28 +83,26 @@ class _GoalsState extends State<Goals> {
             ),
             const Expanded(child: SizedBox()),
             FilledButton.tonal(
-              style: FilledButton.styleFrom(
-                backgroundColor: Colors.blue[400],
-                foregroundColor: Colors.black,
-              ),
-              onPressed: increaseGlass,
-              child: const Text('+'),
-            ),
+                style: FilledButton.styleFrom(
+                  backgroundColor: Colors.blue[400],
+                  foregroundColor: Colors.black,
+                ),
+                onPressed: _increaseGlass,
+                child: const Text('+')),
             const SizedBox(width: 2),
             FilledButton.tonal(
-              style: FilledButton.styleFrom(
-                backgroundColor: Colors.blue[400],
-                foregroundColor: Colors.black,
-              ),
-              onPressed: decreaseGlass,
-              child: const Text('-'),
-            )
+                style: FilledButton.styleFrom(
+                  backgroundColor: Colors.blue[400],
+                  foregroundColor: Colors.black,
+                ),
+                onPressed: _decreaseGlass,
+                child: const Text('-'))
           ],
         ),
         Row(
           children: [
-            const Text(' Sips in Bottle (250ml each) :'),
-            Text('$sip'),
+            const Text('Sips in Bottle (250ml each):'),
+            Text('$sipCount'),
             Image.asset(
               'assets/img/bottle.jpg',
               width: 35,
@@ -94,20 +111,20 @@ class _GoalsState extends State<Goals> {
             ),
             const Expanded(child: SizedBox()),
             FilledButton.tonal(
-              style: FilledButton.styleFrom(
-                backgroundColor: Colors.blue[400],
-              ),
-              onPressed: increaseSip,
-              child: const Text('+'),
-            ),
+                style: FilledButton.styleFrom(
+                  backgroundColor: Colors.blue[400],
+                  foregroundColor: Colors.black,
+                ),
+                onPressed: _increaseSip,
+                child: const Text('+')),
             const SizedBox(width: 2),
             FilledButton.tonal(
-              style: FilledButton.styleFrom(
-                backgroundColor: Colors.blue[400],
-              ),
-              onPressed: decreaseSip,
-              child: const Text('-'),
-            )
+                style: FilledButton.styleFrom(
+                  backgroundColor: Colors.blue[400],
+                  foregroundColor: Colors.black,
+                ),
+                onPressed: _decreaseSip,
+                child: const Text('-'))
           ],
         )
       ],
